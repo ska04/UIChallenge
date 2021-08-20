@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Form</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="container" class="main-container">
+      <div class="page-section dynamic-from">
+        <div id="inputList"></div>
+        <div>
+          <h2>Add New Inputs</h2>
+          <div>
+            <div class="input-container">
+              <label for="inputDropdown">Select Input type:</label>
+              <select id="inputDropdown">
+                <option value="Text">Text</option>
+                <option value="Password">Password</option>
+                <option value="Email">Email</option>
+                <option value="Date">Date</option>
+                <option value="Radio">Radiobutton</option>
+                <option value="Checkbox">Checkbox</option>
+              </select>
+            </div>
+            <div class="input-container">
+              <label for="backgroundColor">Specify Background Color:</label>
+              <input id="backgroundColor" type="color" />
+            </div>
+            <div class="input-container">
+              <label for="textColor">Specify Text Color:</label>
+              <input id="textColor" type="color" />
+            </div>
+            <div class="input-container">
+              <label for="label">Specify Label:</label>
+              <input id="label" type="text" />
+            </div>
+            <div id="optionsContainer">
+              <div class="input-container">
+                <label for="option1">Specify Option-1:</label>
+                <input id="option1" type="text" />
+              </div>
+              <div class="input-container">
+                <label for="option2">Specify Option-2:</label>
+                <input id="option2" type="text" />
+              </div>
+            </div>
+            <div id="lengthContainer">
+              <div class="input-container">
+                <label for="minLength">Specify Min Length:</label>
+                <input id="minLength" type="number" />
+              </div>
+              <div class="input-container">
+                <label for="maxLength">Specify Max Length:</label>
+                <input id="maxLength" type="number" />
+              </div>
+            </div>
+            <div id="dateContainer">
+              <div class="input-container">
+                <label for="minDate">Specify Min Date:</label>
+                <input id="minDate" type="date" />
+              </div>
+              <div class="input-container">
+                <label for="maxDate">Specify Max Date:</label>
+                <input id="maxDate" type="date" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button style="text-align: center" onclick="renderData()">Add</button>
+      </div>
+
+      <div class="page-section render-form">
+        <h2>Rendered Version of Metadata</h2>
+        <div id="renderDataContainer"></div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
