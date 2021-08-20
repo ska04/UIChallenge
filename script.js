@@ -8,17 +8,14 @@ const maxLengthEl = document.getElementById("maxLength");
 const minLengthEl = document.getElementById("minLength");
 
 const optionsContainerEl = document.getElementById("optionsContainer");
-const option1El = document.getElementById("option1");
-const option2El = document.getElementById("option2");
+const groupNameEl = document.getElementById("groupName");
 
 const dateContainerEl = document.getElementById("dateContainer");
 const minDateEl = document.getElementById("minDate");
 const maxDateEl = document.getElementById("maxDate");
 
-const inputListContianerEl = document.getElementById("inputList");
+const inputInfoListContianerEl = document.getElementById("inputList");
 const renderDataContainerEl = document.getElementById("renderDataContainer");
-
-let orderId = 0;
 
 window.onload = () => {
   optionsContainerEl.classList.add("hidden");
@@ -32,16 +29,12 @@ function inputSelectionHandler() {
     dateContainerEl.classList.add("hidden");
 
     optionsContainerEl.classList.remove("hidden");
-  }
-
-  if (inputType === "Date") {
+  } else if (inputType === "Date") {
     lengthContainerEl.classList.add("hidden");
     optionsContainerEl.classList.add("hidden");
 
     dateContainerEl.classList.remove("hidden");
-  }
-
-  if (
+  } else if (
     inputType === "Text" ||
     inputType === "Password" ||
     inputType === "Email"
@@ -54,14 +47,10 @@ function inputSelectionHandler() {
 }
 
 function renderData() {
-    orderId++;
-    createPayloadAndRenderInput();
+  createPayloadAndRenderInputs();
 }
 
-function createPayloadAndRenderInput() {
-  let renderInnerHTML;
-  let listInnerHTML;
-
+function createPayloadAndRenderInputs() {
   const inputTypeVal = inputDropdownEl.value;
   const metaData = {
     inputType: inputTypeVal,
@@ -78,57 +67,77 @@ function createPayloadAndRenderInput() {
     metaData.minLength = minLengthEl.value;
     metaData.maxLength = maxLengthEl.value;
 
-    renderInnerHTML = createInputForDateTextTypes(metaData, 'minlength','maxlength', metaData.minLength, metaData.maxLength);
-
-    listInnerHTML = `<p class="input-list-child">Type: ${metaData.inputType} &nbsp;&nbsp; Max Length: ${metaData.maxLength}
-    &nbsp;&nbsp; Min Length: ${metaData.minLength} &nbsp;&nbsp;BG Color: ${metaData.backColor}
-    &nbsp;&nbsp; Text Color: ${metaData.textColor} &nbsp;&nbsp; OrderId: ${orderId}</p>`;
   } else if (inputTypeVal === "Checkbox" || inputTypeVal === "Radio") {
-    metaData.option1Text = option1El.value;
-    metaData.option2Text = option2El.value;
-
-    renderInnerHTML = `<label style="color:${metaData.textColor}">${metaData.labelText}:</label>
-    <input id='checkRadioInput' type="${metaData.inputType}" name="selectinos"/>
-    <label for="checkRadioInput" style="color:${metaData.textColor}">${metaData.option1Text}</label>
-    <input id='checkRadioInput' type="${metaData.inputType}" name="selectinos"/>
-    <label for="checkRadioInput" style="color:${metaData.textColor}">${metaData.option2Text}</label>`;
-
-    listInnerHTML = `<p class="input-list-child">Type: ${metaData.inputType} &nbsp;&nbsp; 
-    BG Color: ${metaData.backColor} &nbsp;&nbsp; Text Color: ${metaData.textColor} 
-    &nbsp;&nbsp; OrderId: ${orderId}</p>`;
+    metaData.groupNameEl = groupNameEl.value;
   } else if (inputTypeVal === "Date") {
     metaData.minDate = minDateEl.value;
     metaData.maxDate = maxDateEl.value;
-
-
-    renderInnerHTML = createInputForDateTextTypes(metaData,'min','max', metaData.minDate, metaData.maxDate);
-
-    listInnerHTML = `<p class="input-list-child">Type: ${metaData.inputType} &nbsp;&nbsp; Max Date: ${metaData.maxDate}
-    &nbsp;&nbsp; Min Date: ${metaData.minDate} &nbsp;&nbsp;BG Color: ${metaData.backColor}
-    &nbsp;&nbsp; Text Color: ${metaData.textColor} &nbsp;&nbsp; OrderId: ${orderId}</p>`;
   }
 
-  const renderEl = document.createElement("div");
-  renderEl.classList.add('margin-10');
-  renderEl.innerHTML = renderInnerHTML;
-  renderDataContainerEl.appendChild(renderEl);
+  let inputContainer = createInputs(metaData);
+  renderDataContainerEl.appendChild(inputContainer);
 
-  const listEl = document.createElement("div");
-  listEl.innerHTML = listInnerHTML;
-  inputListContianerEl.appendChild(listEl);
+  let inputPropertiesContainer = fetchInputProperties(metaData);
+  inputInfoListContianerEl.appendChild(inputPropertiesContainer);
+
   console.log(JSON.stringify(metaData));
   console.log(metaData);
 }
 
-function createInputForDateTextTypes(metaData, attrName1, attrName2, attrValue1, attrValue2){
-    const renderInnerHTML = `<label style="color:${metaData.textColor}">${metaData.labelText}:</label>
-    <input style="background-color:${metaData.backColor}; 
-    color:${metaData.textColor};" 
-    type="${metaData.inputType}"
-    ${attrName1}="${attrValue1}"
-    ${attrName2}="${attrValue2}"/>`;
+function createInputs(metaData) {
+  const containerDiv = document.createElement("div");
+  containerDiv.classList.add('margin-10');
 
-    return renderInnerHTML;
+  const labelEl = document.createElement("label");
+  labelEl.style.color = metaData.textColor;
+  labelEl.textContent = metaData.labelText;
+
+  const inputEl = document.createElement("input");
+  inputEl.style.backgroundColor = metaData.backColor;
+  inputEl.style.color = metaData.textColor;
+  inputEl.type = metaData.inputType;
+
+  if (
+    metaData.inputType === "Text" ||
+    metaData.inputType === "Password" ||
+    metaData.inputType === "Email"
+  ) {
+    inputEl.minLength = metaData.minLength;
+    inputEl.maxLength = metaData.maxLength;
+  } else if (metaData.inputType === "Date") {
+    inputEl.min = metaData.minDate;
+    inputEl.max = metaData.maxDate;
+  } else if (
+    metaData.inputType === "Checkbox" ||
+    metaData.inputType === "Radio"
+  ) {
+    inputEl.id = "checkRadioInput";
+    inputEl.name = metaData.groupNameEl;
+    labelEl.setAttribute("for", "checkRadioInput");
+  }
+
+  containerDiv.appendChild(labelEl);
+  containerDiv.appendChild(inputEl);
+  return containerDiv;
+}
+
+function fetchInputProperties(metaData) {
+  const paragraphEl = document.createElement("p");
+
+  paragraphEl.textContent = `Type: ${metaData.inputType}; BG-Color: ${metaData.backColor}; 
+  Text-Color: ${metaData.textColor}; `;
+  
+  if (
+    metaData.inputType === "Text" ||
+    metaData.inputType === "Password" ||
+    metaData.inputType === "Email"
+  ) {
+    paragraphEl.textContent += `Min-Length: ${metaData.minLength}; Max-Length: ${metaData.maxLength}`;
+  } else if (metaData.inputType === "Date") {
+    paragraphEl.textContent += `Min-Date: ${metaData.minDate}; Max-Date: ${metaData.maxDate}`;
+  } 
+
+  return paragraphEl;
 }
 
 inputDropdownEl.addEventListener("change", inputSelectionHandler);

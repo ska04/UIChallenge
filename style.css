@@ -9,7 +9,7 @@
 body {
   font-family: "Lato", sans-serif;
   margin: 0;
-  height: 98vh;
+  height: 100vh;
 }
 
 .main-container {
@@ -55,9 +55,9 @@ input:focus{
     outline: none;
 }
 
-.checkbox:checked:before{
-    background-color:green;
-    }
+label{
+  margin-right: 5px;
+}
 
 button {
     padding: 5px;
@@ -70,7 +70,7 @@ button {
   display: none;
 }
 
-.input-list-child {
+p {
   margin: 7px;
   padding: 10px;
   border: var(--border-grey);
