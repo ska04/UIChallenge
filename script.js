@@ -18,6 +18,8 @@ const maxDateEl = document.getElementById("maxDate");
 const inputListContianerEl = document.getElementById("inputList");
 const renderDataContainerEl = document.getElementById("renderDataContainer");
 
+let orderId = 0;
+
 window.onload = () => {
   optionsContainerEl.classList.add("hidden");
   dateContainerEl.classList.add("hidden");
@@ -52,15 +54,16 @@ function inputSelectionHandler() {
 }
 
 function renderData() {
-  createPayload();
+    orderId++;
+    createPayloadAndRenderInput();
 }
 
-function createPayload() {
+function createPayloadAndRenderInput() {
   let renderInnerHTML;
   let listInnerHTML;
 
   const inputTypeVal = inputDropdownEl.value;
-  const payload = {
+  const metaData = {
     inputType: inputTypeVal,
     backColor: backColorEl.value,
     textColor: textColorEl.value,
@@ -72,47 +75,37 @@ function createPayload() {
     inputTypeVal === "Password" ||
     inputTypeVal === "Email"
   ) {
-    payload.minLength = minLengthEl.value;
-    payload.maxLength = maxLengthEl.value;
+    metaData.minLength = minLengthEl.value;
+    metaData.maxLength = maxLengthEl.value;
 
-    renderInnerHTML = `<label style="color:${payload.textColor}">${payload.labelText}:</label>
-    <input style="background-color:${payload.backColor}; 
-    color:${payload.textColor};" 
-    type="${payload.inputType}"
-    minlength="${payload.minLength}"
-    maxlength="${payload.maxLength}"/>`;
+    renderInnerHTML = createInputForDateTextTypes(metaData, 'minlength','maxlength', metaData.minLength, metaData.maxLength);
 
-    listInnerHTML = `<p class="input-list-child">Type: ${payload.inputType} &nbsp;&nbsp; Max Length: ${payload.maxLength}
-    &nbsp;&nbsp; Min Length: ${payload.minLength} &nbsp;&nbsp;BG Color: ${payload.backColor}
-    &nbsp;&nbsp; Text Color: ${payload.textColor}
-    </p>`;
+    listInnerHTML = `<p class="input-list-child">Type: ${metaData.inputType} &nbsp;&nbsp; Max Length: ${metaData.maxLength}
+    &nbsp;&nbsp; Min Length: ${metaData.minLength} &nbsp;&nbsp;BG Color: ${metaData.backColor}
+    &nbsp;&nbsp; Text Color: ${metaData.textColor} &nbsp;&nbsp; OrderId: ${orderId}</p>`;
   } else if (inputTypeVal === "Checkbox" || inputTypeVal === "Radio") {
-    payload.option1Text = option1El.value;
-    payload.option2Text = option2El.value;
+    metaData.option1Text = option1El.value;
+    metaData.option2Text = option2El.value;
 
-    renderInnerHTML = `<label style="color:${payload.textColor}">${payload.labelText}:</label>
-    <input id='checkRadioInput' type="${payload.inputType}" name="selectinos"/>
-    <label for="checkRadioInput" style="color:${payload.textColor}">${payload.option1Text}</label>
-    <input id='checkRadioInput' type="${payload.inputType}" name="selectinos"/>
-    <label for="checkRadioInput" style="color:${payload.textColor}">${payload.option2Text}</label>`;
+    renderInnerHTML = `<label style="color:${metaData.textColor}">${metaData.labelText}:</label>
+    <input id='checkRadioInput' type="${metaData.inputType}" name="selectinos"/>
+    <label for="checkRadioInput" style="color:${metaData.textColor}">${metaData.option1Text}</label>
+    <input id='checkRadioInput' type="${metaData.inputType}" name="selectinos"/>
+    <label for="checkRadioInput" style="color:${metaData.textColor}">${metaData.option2Text}</label>`;
 
-    listInnerHTML = `<p class="input-list-child">Type: ${payload.inputType} &nbsp;&nbsp; 
-    BG Color: ${payload.backColor} &nbsp;&nbsp; Text Color: ${payload.textColor}</p>`;
+    listInnerHTML = `<p class="input-list-child">Type: ${metaData.inputType} &nbsp;&nbsp; 
+    BG Color: ${metaData.backColor} &nbsp;&nbsp; Text Color: ${metaData.textColor} 
+    &nbsp;&nbsp; OrderId: ${orderId}</p>`;
   } else if (inputTypeVal === "Date") {
-    payload.minDate = minDateEl.value;
-    payload.maxDate = maxDateEl.value;
+    metaData.minDate = minDateEl.value;
+    metaData.maxDate = maxDateEl.value;
 
-    renderInnerHTML = `<label style="color:${payload.textColor}">${payload.labelText}:</label>
-    <input style="background-color:${payload.backColor}; 
-    color:${payload.textColor};" 
-    type="${payload.inputType}"
-    min="${payload.minDate}"
-    max="${payload.maxDate}"/>`;
 
-    listInnerHTML = `<p class="input-list-child">Type: ${payload.inputType} &nbsp;&nbsp; Max Date: ${payload.maxDate}
-    &nbsp;&nbsp; Min Date: ${payload.minDate} &nbsp;&nbsp;BG Color: ${payload.backColor}
-    &nbsp;&nbsp; Text Color: ${payload.textColor}
-    </p>`;
+    renderInnerHTML = createInputForDateTextTypes(metaData,'min','max', metaData.minDate, metaData.maxDate);
+
+    listInnerHTML = `<p class="input-list-child">Type: ${metaData.inputType} &nbsp;&nbsp; Max Date: ${metaData.maxDate}
+    &nbsp;&nbsp; Min Date: ${metaData.minDate} &nbsp;&nbsp;BG Color: ${metaData.backColor}
+    &nbsp;&nbsp; Text Color: ${metaData.textColor} &nbsp;&nbsp; OrderId: ${orderId}</p>`;
   }
 
   const renderEl = document.createElement("div");
@@ -123,8 +116,19 @@ function createPayload() {
   const listEl = document.createElement("div");
   listEl.innerHTML = listInnerHTML;
   inputListContianerEl.appendChild(listEl);
-  console.log(JSON.stringify(payload));
-  console.log(payload);
+  console.log(JSON.stringify(metaData));
+  console.log(metaData);
+}
+
+function createInputForDateTextTypes(metaData, attrName1, attrName2, attrValue1, attrValue2){
+    const renderInnerHTML = `<label style="color:${metaData.textColor}">${metaData.labelText}:</label>
+    <input style="background-color:${metaData.backColor}; 
+    color:${metaData.textColor};" 
+    type="${metaData.inputType}"
+    ${attrName1}="${attrValue1}"
+    ${attrName2}="${attrValue2}"/>`;
+
+    return renderInnerHTML;
 }
 
 inputDropdownEl.addEventListener("change", inputSelectionHandler);
