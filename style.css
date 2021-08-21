@@ -1,5 +1,7 @@
 :root {
   --border-grey: 1px solid grey;
+  --success-color: #2ecc71;
+  --error-color: #e74c3c;
 }
 
 * {
@@ -37,26 +39,42 @@ h2 {
   margin-left: 5px;
 }
 
-.input-container {
+.form-control{
   display: flex;
-  justify-content: space-between;
-  width: 50%;
+  width: 70%;
   padding: 7px;
 }
 
-input {
+.form-control label{
+  margin-right: 10px;
+}
+
+.form-control input {
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
-  border-bottom-style: dashed;
+  border-bottom-style: groove;
 }
 
-input:focus{
+.form-control input:focus{
     outline: none;
 }
 
-label{
-  margin-right: 5px;
+.form-control.success input {
+  border-color: var(--success-color);
+}
+
+.form-control.error input {
+  border-color: var(--error-color);
+}
+
+.form-control small {
+  color: var(--error-color);
+  visibility: hidden;
+}
+
+.form-control.error small {
+  visibility: visible;
 }
 
 button {

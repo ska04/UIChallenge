@@ -14,58 +14,64 @@
         <div>
           <h2>Add New Inputs</h2>
           <div>
-            <div class="input-container">
+            <div class="form-control">
               <label for="inputDropdown">Select Input type:</label>
               <select id="inputDropdown">
                 <option value="Text">Text</option>
+                <option value="Date">Date</option>
                 <option value="Password">Password</option>
                 <option value="Email">Email</option>
-                <option value="Date">Date</option>
                 <option value="Radio">Radiobutton</option>
                 <option value="Checkbox">Checkbox</option>
               </select>
             </div>
-            <div class="input-container">
+            <div class="form-control">
               <label for="backgroundColor">Specify Background Color:</label>
               <input id="backgroundColor" type="color" />
             </div>
-            <div class="input-container">
+            <div class="form-control">
               <label for="textColor">Specify Text Color:</label>
               <input id="textColor" type="color" />
             </div>
-            <div class="input-container">
+            <div class="form-control">
               <label for="label">Specify Label:</label>
               <input id="label" type="text" />
+              <small>Error message</small>
             </div>
             <div id="optionsContainer">
-              <div class="input-container">
+              <div class="form-control">
                 <label for="groupName">Specify Group Name:</label>
                 <input id="groupName" type="text" />
+                <small>Error message</small>
               </div>
             </div>
             <div id="lengthContainer">
-              <div class="input-container">
+              <div class="form-control">
                 <label for="minLength">Specify Min Length:</label>
                 <input id="minLength" type="number" />
+                <small>Error message</small>
               </div>
-              <div class="input-container">
+              <div class="form-control">
                 <label for="maxLength">Specify Max Length:</label>
                 <input id="maxLength" type="number" />
+                <small>Error message</small>
               </div>
             </div>
             <div id="dateContainer">
-              <div class="input-container">
+              <div class="form-control">
                 <label for="minDate">Specify Min Date:</label>
                 <input id="minDate" type="date" />
+                <small>Error message</small>
               </div>
-              <div class="input-container">
+              <div class="form-control">
                 <label for="maxDate">Specify Max Date:</label>
                 <input id="maxDate" type="date" />
+                <small>Error message</small>
               </div>
             </div>
           </div>
         </div>
-        <button style="text-align: center" onclick="renderData()">Add</button>
+        <button style="text-align: center" onclick="renderUI()">Add</button>
       </div>
 
       <div class="page-section render-form">
