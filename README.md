@@ -14,18 +14,33 @@ It contains below files/folders:
 
 ## How to run
 
-WE can run this application without server. Just we need to open index.html in the browser and we can use the application. Also we can server this appilcation with server alos(e.g. Live Server in VS Code)
+We can run this application without a server also. Just we need to open index.html in the browser and we can use the application. Also we can serve this appilcation with server also(e.g. Live Server in VS Code)
 
 ## Adding inputs:
 
 It supports 6 types of inputs : Text, Date, Password, Email, Checkbox, Radio(We can group radio buttons to make only one selection at a time). Based on the selection of input form input selection dropdown respectives options will be loaded dynamically for that particular inputs .
 
 ## Attributes/properties we can set fot inputs
-1. Text
+
+**Email**, **Password** and **Text** inputs have same Attributes/properties
+**Checkbox**, **Radiobuttons** inputs have same Attributes/properties.
+
+--Text/Password/Email
     1. Background Color
     2. Text Color
     3. Label -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
     4. Min Length -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
     5. Max Length -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
 
-2. 
+-- Date
+    1. Background Color
+    2. Text Color
+    3. Label -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
+    4. Min Date -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
+    5. Max Date -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
+
+-- ChaeckBox/RadioButton:
+    1. Background Color
+    2. Text Color
+    3. Label -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
+    4. Group Name -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
