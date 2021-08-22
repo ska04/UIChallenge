@@ -23,7 +23,7 @@ It supports 6 types of inputs : Text, Date, Password, Email, Checkbox, Radio(We 
 ## Attributes/properties we can set fot inputs
 
 **Email**, **Password** and **Text** inputs have same Attributes/properties.
-**Checkbox**, **Radiobuttons** inputs have same Attributes/properties.
+**Checkbox**, **Radiobutton** inputs have same Attributes/properties.
 
 - Text/Password/Email
     1. Background Color
