@@ -25,21 +25,21 @@ It supports 6 types of inputs : Text, Date, Password, Email, Checkbox, Radio(We 
 **Email**, **Password** and **Text** inputs have same Attributes/properties
 **Checkbox**, **Radiobuttons** inputs have same Attributes/properties.
 
---Text/Password/Email
+- Text/Password/Email
     1. Background Color
     2. Text Color
     3. Label -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
     4. Min Length -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
     5. Max Length -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
 
--- Date
+- Date
     1. Background Color
     2. Text Color
     3. Label -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
     4. Min Date -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
     5. Max Date -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
 
--- ChaeckBox/RadioButton:
+- ChaeckBox/RadioButton:
     1. Background Color
     2. Text Color
     3. Label -- (Basic required validation is added, we need to fill this otherwise we can't procced.)
