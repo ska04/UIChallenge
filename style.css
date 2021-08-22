@@ -23,6 +23,7 @@ body {
 .page-section {
   height: 100%;
   width: 50%;
+  overflow-y: auto;
 }
 
 .dynamic-from {
@@ -41,12 +42,17 @@ h2 {
 
 .form-control{
   display: flex;
-  width: 70%;
+  width: 100%;
   padding: 7px;
 }
 
 .form-control label{
-  margin-right: 10px;
+  width: 40%;
+  padding-right: 10px;
+}
+
+.form-control select {
+  width: 30%;
 }
 
 .form-control input {
@@ -54,6 +60,8 @@ h2 {
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: groove;
+  width: 30%;
+  padding: 0 10px;
 }
 
 .form-control input:focus{
@@ -71,6 +79,8 @@ h2 {
 .form-control small {
   color: var(--error-color);
   visibility: hidden;
+  width: 30%;
+  margin-left: 15px;
 }
 
 .form-control.error small {

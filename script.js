@@ -18,7 +18,7 @@ const inputInfoListContianerEl = document.getElementById("inputList");
 const renderDataContainerEl = document.getElementById("renderDataContainer");
 
 const INPUT_TYPES = {
-  CHECKBOX: 'CheckBox',
+  CHECKBOX: 'Checkbox',
   DATE: 'Date',
   EMAIL: 'Email',
   PASSWORD: 'Password',
